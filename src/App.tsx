@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import './App.css';
 import Product from './components/Product';
 
@@ -6,17 +6,22 @@ function App() {
   const [cnt, setCounter] = useState<number>(0);
   const [txt, changeTxt] = useState<string>("");
   const [dropTxt, changeDropTxt] = useState<string>("");
+  const inputRef = useRef<HTMLInputElement>(null);
 
   const handleClick = (e:React.MouseEvent<HTMLButtonElement>):void => {
     setCounter(cnt+1);
   }
 
-  const inputChange = (e:React.ChangeEvent<HTMLInputElement>) => {
+  const inputChange = (e:React.ChangeEvent<HTMLInputElement>):void => {
     changeTxt(e.target.value);
   }
 
-  const dropHandler = (e:React.ChangeEvent<HTMLSelectElement>) => {
+  const dropHandler = (e:React.ChangeEvent<HTMLSelectElement>):void => {
     changeDropTxt(e.target.value);
+  }
+
+  const focusClick = (e:React.MouseEvent<HTMLButtonElement>):void => {
+    inputRef.current?.focus();
   }
   return (
     <div className="App">
@@ -35,6 +40,12 @@ function App() {
         <option value="Oranges">Oranges</option>
         <option value="Grapes">Grapes</option>
       </select>
+      <hr />
+      <input type="text" />
+      <br />
+      <input type="text" ref = {inputRef}/>
+      <br />
+      <button onClick={focusClick}>Click</button>
     </div>
   );
 }
