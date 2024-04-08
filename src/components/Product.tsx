@@ -1,9 +1,15 @@
 import React from "react"
 
-const Product:React.FC<{pCode: number, pName: string}> = (props) => {
+interface props {
+    pCode: number;
+    pName?: string;
+    qty?: number;
+}
+
+const Product:React.FC<props> = (props) => {
     return (
         <div>
-            <h3>{props.pCode} - {props.pName}</h3>
+            <h2>{props.pCode} - {props.pName} - {props.qty}</h2>
         </div>
     )
 }
